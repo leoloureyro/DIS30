@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div id="splash">
+      <div id="wall" depth="10"></div>
+      <div class="scene-element" id="camera" depth="7"></div>
+      <div class="scene-element" id="vhs" depth="4"></div>
+      <div class="scene-element" id="pc" depth="1"></div>
+    </div>
+
+    <script type="text/javascript">
+      var depthFocus = 10;
+
+      class sceneElement {
+        constructor(element, depth){
+          this.element = element;
+          this.depth = element.getAttribute("depth");
+        }
+        renderBlur(){
+          let amount = Math.abs(depthFocus - this.depth);
+          this.element.style.filter = `blur(${amount}px)`;
+        }
+      }
+
+      const camera = document.querySelector("#camera");
+      const vhs = document.querySelector("#vhs");
+      const pc = document.querySelector("#pc");
+      const wall = document.querySelector("#wall");
+      const sceneElementsArray = document.getElementsByClassName("scene-element");
+
+      const cameraObj = new sceneElement(camera);
+      const vhsObj = new sceneElement(vhs);
+      const pcObj = new sceneElement(pc);
+      const wallObj = new sceneElement(wall);
+      // const objArray = [cameraObj, vhsObj, pcObj, wallObj];
+
+      function changeFocus(){
+        cameraObj.renderBlur();
+        vhsObj.renderBlur();
+        pcObj.renderBlur();
+        wallObj.renderBlur();
+      }
+
+      for(elem of sceneElementsArray){
+        elem.addEventListener("mouseenter", function(){
+          depthFocus = this.getAttribute("depth");
+          changeFocus();
+        });
+        elem.addEventListener("mouseout", function(){
+          depthFocus = 10;
+          changeFocus();
+        });
+      }
+
+    </script>
+  </body>
+</html>

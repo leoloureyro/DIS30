@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+html, body{
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.scene-element{
+  position: absolute;
+  display: block;
+  height: 100px;
+  width: 100px;
+  background-color: black;
+  transition: filter 0.5s ease;
+}
+
+#splash{
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+#wall{
+  position: absolute;
+  display: block;
+  height: 110%;
+  width: 110%;
+  background-image: url(../src/wall.jpg);
+  background-size: cover;
+  background-position: center;
+  transition: filter 0.5s ease;
+}
+#camera{
+  top: -50px;
+  left: 200px;
+}
+#vhs{
+  top: 500px;
+  left: 800px;
+}
+#pc{
+  top: 100px;
+  left: 1000px;
+}
