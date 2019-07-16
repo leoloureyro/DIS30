@@ -15,48 +15,70 @@
     </div>
 
     <script type="text/javascript">
-      var depthFocus = 10;
+      // El foco toma por defecto el máximo depth de la escena
+      const depthFocusDefault = ()=>{
+        let allSceneElements = document.querySelector("#splash div");
+        let maxDepthValue = 0;
+        for(let elem of allSceneElements){
+          let thisDepth = elem.getAttribute("depth");
+          if (thisDepth > maxDepthValue){
+            maxDepthValue = thisDepth;
+          }
+        };
+        return maxDepthValue;
+      };
+      var depthFocus = depthFocusDefault;
 
       class sceneElement {
         constructor(element, depth){
           this.element = element;
           this.depth = element.getAttribute("depth");
+
+          this.element.addEventListener("mouseenter", ()=>{
+            depthFocus = this.depth;
+            changeSceneFocus();
+          });
+          this.element.addEventListener("mouseout", ()=>{
+            depthFocus = depthFocusDefault;
+            changeSceneFocus();
+          });
         }
         renderBlur(){
           let amount = Math.abs(depthFocus - this.depth);
           this.element.style.filter = `blur(${amount}px)`;
         }
+        setTranslation(x, y){
+          // El siguiente valor numérico determina la sensibilidad de la escena
+          let amount = 0.3 / this.depth;
+          this.element.style.transform = `translate(${x*amount}px, ${y*amount}px)`;
+        }
       }
 
-      const camera = document.querySelector("#camera");
-      const vhs = document.querySelector("#vhs");
-      const pc = document.querySelector("#pc");
-      const wall = document.querySelector("#wall");
-      const sceneElementsArray = document.getElementsByClassName("scene-element");
+      // Objetos para controlar animaciones
+      const cameraObj = new sceneElement(document.querySelector("#camera"));
+      const vhsObj = new sceneElement(document.querySelector("#vhs"));
+      const pcObj = new sceneElement(document.querySelector("#pc"));
+      const wallObj = new sceneElement(document.querySelector("#wall"));
+      const objArray = [cameraObj, vhsObj, pcObj, wallObj];
 
-      const cameraObj = new sceneElement(camera);
-      const vhsObj = new sceneElement(vhs);
-      const pcObj = new sceneElement(pc);
-      const wallObj = new sceneElement(wall);
-      // const objArray = [cameraObj, vhsObj, pcObj, wallObj];
+      function changeSceneFocus(){
+        for(let obj of objArray){
+          obj.renderBlur();
+        }
+      };
+      function changeSceneAngle(x, y){
+        for(let obj of objArray){
+          obj.setTranslation(x, y);
+        }
+      };
+      changeSceneFocus();
+      changeSceneAngle();
 
-      function changeFocus(){
-        cameraObj.renderBlur();
-        vhsObj.renderBlur();
-        pcObj.renderBlur();
-        wallObj.renderBlur();
-      }
-
-      for(elem of sceneElementsArray){
-        elem.addEventListener("mouseenter", function(){
-          depthFocus = this.getAttribute("depth");
-          changeFocus();
-        });
-        elem.addEventListener("mouseout", function(){
-          depthFocus = 10;
-          changeFocus();
-        });
-      }
+      window.addEventListener("mousemove", function(event){
+        let x = (window.innerWidth / 2) - event.clientX;
+        let y = (window.innerHeight / 2) - event.clientY;
+        changeSceneAngle(x, y);
+      })
 
     </script>
   </body>
