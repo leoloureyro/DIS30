@@ -8,10 +8,16 @@
   </head>
   <body>
     <div id="splash">
-      <div id="wall" depth="10"></div>
-      <div class="scene-element" id="camera" depth="7"></div>
-      <div class="scene-element" id="vhs" depth="4"></div>
-      <div class="scene-element" id="pc" depth="1"></div>
+      <div id="wall" depth="13"></div>
+      <div class="scene-element" id="camera" depth="10">
+        <!-- <img src="src/vhs.png"> -->
+      </div>
+      <div class="scene-element" id="vhs" depth="5">
+        <img src="src/vhs.png">
+      </div>
+      <div class="scene-element" id="recorder" depth="1">
+        <img src="src/recorder.png">
+      </div>
     </div>
 
     <script type="text/javascript">
@@ -30,9 +36,11 @@
       var depthFocus = depthFocusDefault;
 
       class sceneElement {
-        constructor(element, depth){
+        constructor(element, rotAngle = 0){
           this.element = element;
           this.depth = element.getAttribute("depth");
+          this.angle = rotAngle;
+          this.element.style.transform = `rotate(${this.angle}deg)`;
 
           this.element.addEventListener("mouseenter", ()=>{
             depthFocus = this.depth;
@@ -47,19 +55,19 @@
           let amount = Math.abs(depthFocus - this.depth);
           this.element.style.filter = `blur(${amount}px)`;
         }
-        setTranslation(x, y){
+        setTransform(x, y){
           // El siguiente valor numérico determina la sensibilidad de la escena
           let amount = 0.3 / this.depth;
-          this.element.style.transform = `translate(${x*amount}px, ${y*amount}px)`;
+          this.element.style.transform = `translate(${x*amount}px, ${y*amount}px) rotate(${this.angle}deg)`;
         }
       }
 
       // Objetos para controlar animaciones
       const cameraObj = new sceneElement(document.querySelector("#camera"));
-      const vhsObj = new sceneElement(document.querySelector("#vhs"));
-      const pcObj = new sceneElement(document.querySelector("#pc"));
+      const vhsObj = new sceneElement(document.querySelector("#vhs"), -24);
+      const recorderObj = new sceneElement(document.querySelector("#recorder"));
       const wallObj = new sceneElement(document.querySelector("#wall"));
-      const objArray = [cameraObj, vhsObj, pcObj, wallObj];
+      const objArray = [cameraObj, vhsObj, recorderObj, wallObj];
 
       function changeSceneFocus(){
         for(let obj of objArray){
@@ -68,7 +76,7 @@
       };
       function changeSceneAngle(x, y){
         for(let obj of objArray){
-          obj.setTranslation(x, y);
+          obj.setTransform(x, y);
         }
       };
       changeSceneFocus();

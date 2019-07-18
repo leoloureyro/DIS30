@@ -9,10 +9,9 @@ html, body{
 
 .scene-element{
   position: absolute;
-  display: block;
-  height: 100px;
-  width: 100px;
-  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: filter 0.5s ease;
 }
 
@@ -26,8 +25,10 @@ html, body{
 #wall{
   position: absolute;
   display: block;
-  height: 110%;
-  width: 110%;
+  height: calc(100% + 80px);
+  width: calc(100% + 100px);
+  top: -40px;
+  left: -50px;
   background-image: url(../src/wall.jpg);
   background-size: cover;
   background-position: center;
@@ -39,9 +40,14 @@ html, body{
 }
 #vhs{
   top: 500px;
-  left: 800px;
+  left: 600px;
 }
-#pc{
-  top: 100px;
-  left: 1000px;
+/* #vhs::after{
+  content: "HISTORIA";
+  position: absolute;
+  color: white;
+} */
+#recorder{
+  top: -10%;
+  left: 70%;
 }
