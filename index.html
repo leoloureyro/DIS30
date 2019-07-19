@@ -8,14 +8,14 @@
   </head>
   <body>
     <div id="splash">
-      <div id="wall" depth="13"></div>
+      <div id="wall" depth="15"></div>
       <div class="scene-element" id="camera" depth="10" rotation="-20">
         <img src="src/camera.png" height="600">
       </div>
       <div class="scene-element" id="vhs" depth="5" rotation="-25">
         <img src="src/vhs.png">
       </div>
-      <div class="scene-element" id="recorder" depth="1">
+      <div class="scene-element" id="recorder" depth="2" rotation="10">
         <img src="src/recorder.png">
       </div>
     </div>
@@ -79,7 +79,7 @@
       };
       const changeSceneAngle = () => {
         let x = (window.innerWidth / 2) - xMousePos;
-        let y = (window.innerHeight / 2) - yMousePos + window.scrollY;
+        let y = (window.innerHeight / 2) - yMousePos + (window.scrollY * 2);
 
         for(let obj of objArray){
           obj.setTransform(x, y);
@@ -89,8 +89,8 @@
       changeSceneFocus();
       changeSceneAngle();
 
-      var xMousePos;
-      var yMousePos;
+      var xMousePos = window.innerWidth / 2;
+      var yMousePos = window.innerHeight / 2;
 
       window.addEventListener("mousemove", (event) => {
         xMousePos = event.clientX;
