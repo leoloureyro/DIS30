@@ -1,5 +1,20 @@
 @charset "UTF-8";
 
+*{
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgb(0, 0, 0);
+  scrollbar-width: thin;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+}
+*::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
 html, body{
   height: 100%;
   width: 100%;
@@ -16,7 +31,7 @@ html, body{
 }
 
 #splash{
-  position: absolute;
+  position: relative;
   display: block;
   height: 100%;
   width: 100%;
@@ -35,12 +50,12 @@ html, body{
   transition: filter 0.5s ease;
 }
 #camera{
-  top: -50px;
-  left: 200px;
+  right: 75%;
+  bottom: 30%;
 }
 #vhs{
-  top: 500px;
-  left: 600px;
+  top: 73%;
+  left: 45%;
 }
 /* #vhs::after{
   content: "HISTORIA";
