@@ -1,0 +1,5 @@
+@media screen and (min-width: 1439px) {
+  .scene-element img{
+    /* transform: scale(1.15); */
+  }
+}

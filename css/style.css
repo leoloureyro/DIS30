@@ -29,6 +29,9 @@ html, body{
   align-items: center;
   transition: filter 0.5s ease;
 }
+.scene-element img{
+  height: 100%;
+}
 
 #splash{
   position: relative;
@@ -50,12 +53,14 @@ html, body{
   transition: filter 0.5s ease;
 }
 #camera{
-  right: 75%;
-  bottom: 30%;
+  height: 119%;
+  right: 73%;
+  bottom: 5%;
 }
 #vhs{
+  height: 57%;
   top: 73%;
-  left: 45%;
+  left: 47%;
 }
 /* #vhs::after{
   content: "HISTORIA";
@@ -63,6 +68,7 @@ html, body{
   color: white;
 } */
 #recorder{
-  top: -30%;
+  height: 128%;
+  bottom: 15%;
   left: 70%;
 }
