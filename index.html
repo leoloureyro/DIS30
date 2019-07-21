@@ -9,8 +9,8 @@
   </head>
   <body>
     <div id="splash">
-      <div id="wall" depth="15"></div>
-      <div class="scene-element" id="camera" depth="10" rotation="-20">
+      <div id="wall" depth="17"></div>
+      <div class="scene-element" id="camera" depth="12" rotation="-20">
         <img src="src/camera.png">
       </div>
       <div class="scene-element" id="vhs" depth="5" rotation="-25">
@@ -80,7 +80,7 @@
       };
       const changeSceneAngle = () => {
         let x = (window.innerWidth / 2) - xMousePos;
-        let y = (window.innerHeight / 2) - yMousePos + (window.scrollY * 2);
+        let y = (window.innerHeight / 2) - yMousePos - (window.scrollY * 4);
 
         for(let obj of objArray){
           obj.setTransform(x, y);
