@@ -24,7 +24,11 @@
 
     </div>
 
+    <script type="text/javascript" src="js/scene.js"></script>
+
     <script type="text/javascript">
+    var scene = new Scene(document.getElementById("splash"))
+    /*
       // El foco toma por defecto el máximo depth de la escena
       const depthFocusDefault = ()=>{
         let allSceneElements = document.querySelector("#splash div");
@@ -67,8 +71,8 @@
       }
 
       // Objetos para controlar animaciones
-      const cameraObj = new sceneElement(document.querySelector("#camera"), -25);
-      const vhsObj = new sceneElement(document.querySelector("#vhs"), -24);
+      const cameraObj = new sceneElement(document.querySelector("#camera"));
+      const vhsObj = new sceneElement(document.querySelector("#vhs"));
       const recorderObj = new sceneElement(document.querySelector("#recorder"));
       const wallObj = new sceneElement(document.querySelector("#wall"));
       const objArray = [cameraObj, vhsObj, recorderObj, wallObj];
@@ -101,7 +105,7 @@
       window.addEventListener("scroll", () => {
         changeSceneAngle();
       })
-
+      */
     </script>
   </body>
 </html>
