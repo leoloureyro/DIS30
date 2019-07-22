@@ -13,18 +13,20 @@
   scrollbar-color: rgba(255, 255, 255, 0.3) rgb(0, 0, 0);
   scrollbar-width: thin;
 }
-*::-webkit-scrollbar {
+*::-webkit-scrollbar{
   width: 6px;
 }
-*::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track{
   background-color: rgba(0, 0, 0, 0);
 }
-*::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb{
   background-color: rgba(255, 255, 255, 0.3);
 }
 
 :root{
-  --amarillo-tarantino: #F5EA74;
+  --amarillo-retro: #F5EA74;
+  --magenta-retro: #fe50c3;
+  --cyan-retro: #93bdf7;
 }
 
 html, body{
@@ -37,19 +39,24 @@ html, body{
 .section-holder{
   position: absolute;
   display: block;
-  font-family: cooper-black-std, serif;
-  font-size: 1.5em;
-  line-height: 1.9em;
-  text-align: center;
-  color: var(--amarillo-tarantino);
+  margin-top: -40px;
   opacity: 0;
+  color: white;
+  font-family: changeling-neo, serif;
+  font-size: 1.5em;
+  line-height: 1.7em;
+  text-align: center;
   transform: translateY(-50px);
   filter: blur(10px);
   transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
   pointer-events: none;
+  /* font-family: cooper-black-std, serif; */
+  /* color: var(--amarillo-retro); */
 }
 .section-holder .big{
   font-size: 2.5em;
+  font-weight: 700;
+  /* font-family: changeling-neo-inline; */
 }
 .section-holder.active{
   opacity: 1;
@@ -66,7 +73,8 @@ html, body{
   align-items: center;
   transition: filter 0.5s ease;
 }
-.scene-element img{
+.scene-element a, .scene-element img{
+  position: relative;
   height: 100%;
 }
 
@@ -77,6 +85,9 @@ html, body{
   align-items: center;
   height: 100%;
   width: 100%;
+  background-image: url(../src/wall.jpg);
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
 }
 #splash::after{
@@ -105,7 +116,7 @@ html, body{
   transition: filter 0.5s ease;
 }
 #camera{
-  height: 119%;
+  height: 140%;
   right: 73%;
   bottom: 5%;
 }
