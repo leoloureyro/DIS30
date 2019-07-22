@@ -1,7 +1,9 @@
 class Scene{
   constructor(element){
     // Escena
-    this.element = element;
+    this.element = document.getElementById(element); // Recibe ID del elemento escena
+    this.minSceneWidth = 800; // Ancho mínimo para las animaciones del cursor
+
     // Controles de foco
     this.depthOnFocus = this.depthFocusDefault = () => {
       let allSceneElements = element.querySelectorAll("div");
@@ -14,6 +16,7 @@ class Scene{
       };
       return maxDepthValue;
     };
+
     // Elementos en la escena
     this.allSceneElements = this.element.querySelectorAll("div");
     this.allSceneObjects = [];
@@ -26,23 +29,33 @@ class Scene{
         this.changeSceneFocus(this.depthFocusDefault);
       });
     };
+
     // Renderizar puesta en escena
     this.changeSceneFocus(this.depthOnFocus);
     this.changeSceneAngle();
-    // Mouse tracking
+
+    // Inicializar events handlers
+    this.sceneEventsHandler();
+  }
+
+  // Control de eventos en la escena
+  sceneEventsHandler(){
     this.xMousePos = this.element.offsetWidth / 2;
     this.yMousePos = this.element.offsetHeight / 2;
 
-    window.addEventListener("mousemove", (event) => {
-      this.xMousePos = event.clientX;
-      this.yMousePos = event.clientY;
-      this.changeSceneAngle();
-    });
-    window.addEventListener("scroll", () => {
-      this.changeSceneAngle();
-    })
+    if(window.innerWidth > this.minSceneWidth){
+      window.addEventListener("mousemove", (event) => {
+        this.xMousePos = event.clientX;
+        this.yMousePos = event.clientY;
+        this.changeSceneAngle();
+      });
+      window.addEventListener("scroll", () => {
+        this.changeSceneAngle();
+      })
+    }
   }
-  // Controles de efectos en la escena
+
+  // Control de efectos en la escena
   changeSceneFocus(depth){
     for(let obj of this.allSceneObjects){
       obj.renderBlur(depth);
@@ -50,7 +63,7 @@ class Scene{
   };
   changeSceneAngle(){
     let x = (this.element.offsetWidth / 2) - this.xMousePos;
-    let y = (this.element.offsetHeight / 2) - this.yMousePos + (window.scrollY * 2);
+    let y = (this.element.offsetHeight / 2) - this.yMousePos - (window.scrollY * 2);
 
     for(let obj of this.allSceneObjects){
       obj.setTransform(x, y);

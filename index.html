@@ -4,108 +4,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title></title>
+    <!-- ADOBE COOPER BLACK -->
+    <link rel="stylesheet" href="https://use.typekit.net/hkc8zia.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
   </head>
   <body>
     <div id="splash">
       <div id="wall" depth="17"></div>
-      <div class="scene-element" id="camera" depth="12" rotation="-20">
-        <img src="src/camera.png">
-      </div>
-      <div class="scene-element" id="vhs" depth="5" rotation="-25">
-        <img src="src/vhs.png">
-      </div>
-      <div class="scene-element" id="recorder" depth="2" rotation="10">
-        <img src="src/recorder.png">
-      </div>
+      <!-- TÍTULOS DE SECCIONES -->
+      <p class="section-holder camera">CRONOGRAMA</p>
+      <p class="section-holder vhs">CRONOGRAMA</p>
+      <p class="section-holder recorder">CRONOGRAMA</p>
+      <!-- ELEMENTOS DE LA ESCENA -->
+      <div class="scene-element" id="camera" depth="12" rotation="-20"><img src="src/camera.png"></div>
+      <div class="scene-element" id="vhs" depth="5" rotation="-25"><img src="src/vhs.png"></div>
+      <div class="scene-element" id="recorder" depth="2" rotation="10"><img src="src/recorder.png"></div>
     </div>
-    <div style="display:block; height:500px;">
 
+    <div style="display:block; height:500px;">
+      <!-- SIMULACIÓN DE CONTENIDO -->
     </div>
 
     <script type="text/javascript" src="js/scene.js"></script>
-
     <script type="text/javascript">
-    var scene = new Scene(document.getElementById("splash"))
-    /*
-      // El foco toma por defecto el máximo depth de la escena
-      const depthFocusDefault = ()=>{
-        let allSceneElements = document.querySelector("#splash div");
-        let maxDepthValue = 0;
-        for(let elem of allSceneElements){
-          let thisDepth = elem.getAttribute("depth");
-          if (thisDepth > maxDepthValue){
-            maxDepthValue = thisDepth;
-          }
-        };
-        return maxDepthValue;
-      };
-      var depthFocus = depthFocusDefault;
+      var scene = new Scene("splash")
 
-      class sceneElement {
-        constructor(element){
-          this.element = element;
-          this.depth = element.getAttribute("depth");
-          this.angle = element.getAttribute("rotation") || 0;
-          this.element.style.transform = `rotate(${this.angle}deg)`;
-
-          this.element.addEventListener("mouseenter", ()=>{
-            depthFocus = this.depth;
-            changeSceneFocus();
-          });
-          this.element.addEventListener("mouseout", ()=>{
-            depthFocus = depthFocusDefault;
-            changeSceneFocus();
-          });
-        }
-        renderBlur(){
-          let amount = Math.abs(depthFocus - this.depth);
-          this.element.style.filter = `blur(${amount}px)`;
-        }
-        setTransform(x, y){
-          // El siguiente valor numérico determina la sensibilidad de la escena
-          let amount = 0.3 / this.depth;
-          this.element.style.transform = `translate(${x*amount}px, ${y*amount}px) rotate(${this.angle}deg)`;
-        }
-      }
-
-      // Objetos para controlar animaciones
-      const cameraObj = new sceneElement(document.querySelector("#camera"));
-      const vhsObj = new sceneElement(document.querySelector("#vhs"));
-      const recorderObj = new sceneElement(document.querySelector("#recorder"));
-      const wallObj = new sceneElement(document.querySelector("#wall"));
-      const objArray = [cameraObj, vhsObj, recorderObj, wallObj];
-
-      const changeSceneFocus = () => {
-        for(let obj of objArray){
-          obj.renderBlur();
-        }
-      };
-      const changeSceneAngle = () => {
-        let x = (window.innerWidth / 2) - xMousePos;
-        let y = (window.innerHeight / 2) - yMousePos - (window.scrollY * 4);
-
-        for(let obj of objArray){
-          obj.setTransform(x, y);
-        }
-      };
-
-      changeSceneFocus();
-      changeSceneAngle();
-
-      var xMousePos = window.innerWidth / 2;
-      var yMousePos = window.innerHeight / 2;
-
-      window.addEventListener("mousemove", (event) => {
-        xMousePos = event.clientX;
-        yMousePos = event.clientY;
-        changeSceneAngle();
-      });
-      window.addEventListener("scroll", () => {
-        changeSceneAngle();
-      })
-      */
     </script>
   </body>
 </html>
