@@ -13,9 +13,9 @@
     <div id="splash">
       <div id="wall" depth="17"></div>
       <!-- TÍTULOS DE SECCIONES -->
-      <p class="section-holder camera">CRONOGRAMA</p>
-      <p class="section-holder vhs">CRONOGRAMA</p>
-      <p class="section-holder recorder">CRONOGRAMA</p>
+      <p class="section-holder camera">Un poco de<br><span class="big">HISTORIA</span></p>
+      <p class="section-holder vhs">Mantenete en<br><span class="big">CONTACTO</span></p>
+      <p class="section-holder recorder">Cronograma de<br><span class="big">ACTIVIDADES</span></p>
       <!-- ELEMENTOS DE LA ESCENA -->
       <div class="scene-element" id="camera" depth="12" rotation="-20"><img src="src/camera.png"></div>
       <div class="scene-element" id="vhs" depth="5" rotation="-25"><img src="src/vhs.png"></div>
@@ -30,6 +30,17 @@
     <script type="text/javascript">
       var scene = new Scene("splash")
 
+      const splashElements = document.getElementsByClassName("scene-element");
+      for(let elem of splashElements){
+        elem.addEventListener("mouseover", function(){
+          let element = this.getAttribute("id");
+          document.querySelector(`.section-holder.${element}`).classList.add("active");
+        });
+        elem.addEventListener("mouseout", function(){
+          let element = this.getAttribute("id");
+          document.querySelector(`.section-holder.${element}`).classList.remove("active");
+        });
+      }
     </script>
   </body>
 </html>

@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+@keyframes titles {
+  from{
+    opacity: 0;
+    transform: translateY(50px);
+    filter: blur(10px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0px);
+    filter: blur(0px);
+  }
+}
+
 *{
   scrollbar-color: rgba(255, 255, 255, 0.3) rgb(0, 0, 0);
   scrollbar-width: thin;
@@ -14,6 +27,9 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+:root{
+  --amarillo-tarantino: #F5EA74;
+}
 
 html, body{
   height: 100%;
@@ -22,6 +38,31 @@ html, body{
   margin: 0px;
 }
 
+.section-holder{
+  position: absolute;
+  display: block;
+  font-family: cooper-black-std, serif;
+  font-size: 1.5em;
+  line-height: 1.9em;
+  text-align: center;
+  color: var(--amarillo-tarantino);
+  opacity: 0;
+  transform: translateY(-50px);
+  filter: blur(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+  pointer-events: none;
+}
+.section-holder .big{
+  font-size: 2.5em;
+}
+.section-holder.active{
+  opacity: 1;
+  transform: translateY(0px);
+  filter: blur(0px);
+  animation-name: titles;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+}
 .scene-element{
   position: absolute;
   display: flex;
