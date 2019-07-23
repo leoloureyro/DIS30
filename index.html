@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/responsive.css">
   </head>
   <body>
-    <div id="splash">
+    <section id="splash">
       <div id="wall" depth="17"></div>
       <!-- TÍTULOS DE SECCIONES -->
       <p class="section-holder camera">Un poco de<br><span class="big">HISTORIA</span></p>
@@ -26,16 +26,18 @@
       <div class="scene-element" id="recorder" depth="2" rotation="10">
         <a href="#contacto"><img src="src/recorder.png"></a>
       </div>
-    </div>
+    </section>
 
-    <div style="display:block; height:500px;">
-      <!-- SIMULACIÓN DE CONTENIDO -->
-    </div>
+    <section id="countdown">
+      Faltan <span id="dias"></span>días <span id="hs"></span>hs <span id="mins"></span>m <span id="segs"></span>s
+    </section>
 
     <script type="text/javascript" src="js/scene.js"></script>
     <script type="text/javascript">
-      var scene = new Scene("splash")
+      // Convertir el splash en una escena
+      var scene = new Scene("splash");
 
+      // Animar titulos dinámicos para el splash
       const splashElements = document.getElementsByClassName("scene-element");
       for(let elem of splashElements){
         elem.addEventListener("mouseover", function(){
@@ -47,6 +49,29 @@
           document.querySelector(`.section-holder.${element}`).classList.remove("active");
         });
       }
+
+      // Mostrar cuenta regresiva
+      var countDown = new Date("Oct 10, 2019 00:00:00").getTime();
+      var x = setInterval(function() {
+        let ahora = new Date().getTime();
+        let distancia = countDown - ahora;
+        let dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+        let horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+        let segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+        document.getElementById("dias").textContent = dias;
+        document.getElementById("hs").textContent = horas;
+        document.getElementById("mins").textContent = minutos;
+        document.getElementById("segs").textContent = segundos;
+
+        if (distancia < 0) {
+          clearInterval(x);
+          document.getElementById("hs").textContent = "00";
+          document.getElementById("mins").textContent = "00";
+          document.getElementById("segs").textContent = "00";
+        }
+      }, 1000);
     </script>
   </body>
 </html>
