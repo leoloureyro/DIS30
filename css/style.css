@@ -8,6 +8,22 @@
     transform: translateY(0px);
   }
 }
+@keyframes neon-tilting {
+  0% {opacity: 1;}
+  4% {opacity: 1;}
+  5% {opacity: 0;}
+  7% {opacity: 0;}
+  8% {opacity: 1;}
+  14% {opacity: 1;}
+  15% {opacity: 0;}
+  30% {opacity: 0;}
+  100% {opacity: 1;}
+}
+@keyframes display-state {
+  0% {display: block;}
+  99% {display: block;}
+  100% {display: none;}
+}
 
 *{
   scrollbar-color: rgba(255, 255, 255, 0.3) rgb(0, 0, 0);
@@ -42,6 +58,9 @@ html, body{
   text-align: center;
   color: white;
 }
+img{
+  pointer-events: none;
+}
 section{
   position: relative;
   display: block;
@@ -54,21 +73,23 @@ section{
   margin-top: -40px;
   opacity: 0;
   color: white;
-  font-family: changeling-neo, serif;
   font-size: 1.5em;
-  line-height: 1.7em;
   text-align: center;
   transform: translateY(-50px);
   filter: blur(10px);
   transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
   pointer-events: none;
-  /* font-family: cooper-black-std, serif; */
-  /* color: var(--amarillo-retro); */
+  /* Tarantino Style
+  font-family: cooper-black-std, serif;
+  color: var(--amarillo-retro); */
 }
 .section-holder .big{
-  font-size: 2.5em;
+  line-height: 1em;
+  font-size: 3.5em;
   font-weight: 700;
-  /* font-family: changeling-neo-inline; */
+  font-family: flood-std;
+  color: var(--magenta-retro);
+  filter: drop-shadow(3px 3px 0px var(--cyan-retro));
 }
 .section-holder.active{
   opacity: 1;
@@ -87,9 +108,39 @@ section{
 }
 .scene-element a, .scene-element img{
   position: relative;
+  display: block;
   height: 100%;
+  top: 0px;
+}
+.neon-glow{
+  position: absolute!important;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+.scene-element:hover .neon-glow{
+  opacity: 1;
+  animation-name: neon-tilting;
+  animation-duration: 1.5s;
+  animation-iteration-count: 1;
 }
 
+#vhs-noise{
+  position: fixed;
+  display: none;
+  height: 100%;
+  width: 100%;
+  background-image: url("../src/tenor.gif");
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  z-index: 100;
+}
+#inicio{
+  display: grid;
+  grid-template-rows: 1fr 40px;
+  height: 100%;
+}
 #splash{
   position: relative;
   display: flex;
@@ -102,7 +153,7 @@ section{
   background-position: center;
   overflow: hidden;
 }
-#splash::after{
+body::after{
   content: "";
   position: absolute;
   display: block;
@@ -143,14 +194,15 @@ section{
   left: 70%;
 }
 #countdown{
-  padding: 15px 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10%;
   box-sizing: border-box;
   background-color: var(--magenta-retro);
+  background: linear-gradient(90deg, var(--violeta-claro-retro) 0%, var(--magenta-retro) 30%, var(--magenta-retro) 70%, var(--violeta-claro-retro) 100%);
   font-size: 1.3em;
   color: var(--violeta-oscuro-retro);
 }
 #countdown span{
-  font-family: changeling-neo, serif;
-  font-weight: 400;
-  font-size: 1.3em;
 }

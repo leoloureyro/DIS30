@@ -44,7 +44,7 @@ class Scene{
     this.yMousePos = this.element.offsetHeight / 2;
 
     if(window.innerWidth > this.minSceneWidth){
-      window.addEventListener("mousemove", (event) => {
+      this.element.addEventListener("mousemove", (event) => {
         this.xMousePos = event.clientX;
         this.yMousePos = event.clientY;
         this.changeSceneAngle();

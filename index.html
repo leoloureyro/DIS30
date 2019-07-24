@@ -9,28 +9,50 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
   </head>
+
   <body>
-    <section id="splash">
-      <div id="wall" depth="17"></div>
-      <!-- TÍTULOS DE SECCIONES -->
-      <p class="section-holder camera">Un poco de<br><span class="big">HISTORIA</span></p>
-      <p class="section-holder vhs">Cronograma de<br><span class="big">ACTIVIDADES</span></p>
-      <p class="section-holder recorder">Mantenete en<br><span class="big">CONTACTO</span></p>
-      <!-- ELEMENTOS DE LA ESCENA -->
-      <div class="scene-element" id="camera" depth="12" rotation="-20">
-        <a href="#historia"><img src="src/camera.png"></a>
+    <div id="vhs-noise"></div>
+
+    <section id="inicio">
+      <!-- ESCENA ANIMADA -->
+      <div id="splash">
+        <div id="wall" depth="17"></div>
+        <!-- TÍTULOS DE SECCIONES -->
+        <p class="section-holder camera">Un poco de<br><span class="big">HISTORIA</span></p>
+        <p class="section-holder vhs">Cronograma de<br><span class="big">ACTIVIDADES</span></p>
+        <p class="section-holder recorder">Mantenete en<br><span class="big">CONTACTO</span></p>
+        <!-- ELEMENTOS DE LA ESCENA -->
+        <div class="scene-element" id="camera" depth="12" rotation="-20">
+          <a href="#historia">
+            <img src="src/camera.png" class="object">
+            <img src="src/camera-overlay.png" class="neon-glow">
+          </a>
+        </div>
+        <div class="scene-element" id="vhs" depth="5" rotation="-25">
+          <a href="#actividades">
+            <img src="src/vhs.png">
+            <img src="src/vhs-overlay.png" class="neon-glow">
+          </a>
+        </div>
+        <div class="scene-element" id="recorder" depth="2" rotation="10">
+          <a href="#contacto">
+            <img src="src/recorder.png">
+            <img src="src/recorder-overlay.png" class="neon-glow">
+          </a>
+        </div>
       </div>
-      <div class="scene-element" id="vhs" depth="5" rotation="-25">
-        <a href="#actividades"><img src="src/vhs.png"></a>
-      </div>
-      <div class="scene-element" id="recorder" depth="2" rotation="10">
-        <a href="#contacto"><img src="src/recorder.png"></a>
+      <!-- CUENTA REGRESIVA -->
+      <div id="countdown">
+        <p>
+          Faltan <span id="dias">--</span>días
+          <span id="hs">--</span>hs
+          <span id="mins">--</span>m
+          <span id="segs">--</span>s
+        </p>
       </div>
     </section>
 
-    <section id="countdown">
-      Faltan <span id="dias"></span>días <span id="hs"></span>hs <span id="mins"></span>m <span id="segs"></span>s
-    </section>
+    <section style="height:500px;"></section>
 
     <script type="text/javascript" src="js/scene.js"></script>
     <script type="text/javascript">
@@ -72,6 +94,18 @@
           document.getElementById("segs").textContent = "00";
         }
       }, 1000);
+
+      const imgs = document.getElementsByTagName("img");
+      const imgObj = new Image();
+      // objImage.src = 'images/image1n.gif';
+      // objImage.onLoad = imagesLoaded();
+
+      window.addEventListener("scroll", () => {
+        document.getElementById("vhs-noise").style.display = "block";
+        setTimeout(function(){
+          document.getElementById("vhs-noise").style.display = "none";
+        }, 500);
+      })
     </script>
   </body>
 </html>
