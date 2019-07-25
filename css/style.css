@@ -66,6 +66,12 @@ section{
   display: block;
   width: 100%;
 }
+h2{
+  line-height: 1em;
+  font-size: 3.5em;
+  font-weight: 700;
+  font-family: flood-std;
+}
 
 .section-holder{
   position: absolute;
@@ -124,21 +130,7 @@ section{
   animation-iteration-count: 1;
 }
 
-#vhs-noise{
-  position: fixed;
-  display: none;
-  height: 100%;
-  width: 100%;
-  background-image: url("../src/tenor.gif");
-  background-position: center;
-  background-size: cover;
-  pointer-events: none;
-  mix-blend-mode: lighten;
-  z-index: 100;
-}
 #inicio{
-  display: grid;
-  grid-template-rows: 1fr 40px;
   height: 100%;
 }
 #splash{
@@ -152,19 +144,6 @@ section{
   background-size: cover;
   background-position: center;
   overflow: hidden;
-}
-body::after{
-  content: "";
-  position: absolute;
-  display: block;
-  height: 100%;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  background-image: url("../src/noise.gif");
-  background-repeat: repeat;
-  opacity: 0.3;
-  pointer-events: none;
 }
 #wall{
   position: absolute;
@@ -194,15 +173,58 @@ body::after{
   left: 70%;
 }
 #countdown{
+  position: absolute;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 10%;
-  box-sizing: border-box;
-  background-color: var(--magenta-retro);
-  background: linear-gradient(90deg, var(--violeta-claro-retro) 0%, var(--magenta-retro) 30%, var(--magenta-retro) 70%, var(--violeta-claro-retro) 100%);
-  font-size: 1.3em;
-  color: var(--violeta-oscuro-retro);
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  top: 0px;
+  right: 0px;
+  padding: 20px 40px;
+  pointer-events: none;
+  text-align: right;
 }
-#countdown span{
+#countdown p{
+  display: block;
+  background-color: var(--negro-retro);
+  padding: 5px 10px;
+  margin: 0px 0px 10px 0px;
+  color: white;
+  font-family: t26-carbon, monospace;
+  font-size: 1.3em;
+  font-weight: 700;
+  font-style: normal;
+  text-align: right;
+}
+#historia{
+  padding: 50px 10%;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, var(--negro-retro) 0%, var(--violeta-oscuro-retro) 100%);
+}
+
+/* SHADERS */
+body::after{
+  content: "";
+  position: fixed;
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  background-image: url("../src/noise.gif");
+  background-repeat: repeat;
+  opacity: 0.3;
+  pointer-events: none;
+}
+#vhs-noise{
+  position: fixed;
+  display: none;
+  height: 100%;
+  width: 100%;
+  background-image: url("../src/tenor.gif");
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  z-index: 100;
 }
