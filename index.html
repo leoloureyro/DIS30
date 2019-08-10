@@ -4,14 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>DIS30 | FADU UBA</title>
-    <!-- ADOBE COOPER BLACK -->
     <link rel="stylesheet" href="https://use.typekit.net/hkc8zia.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
   </head>
 
   <body>
-    <div id="vhs-noise"></div>
+    <div id="big-loader" style="opacity: 1;">
+      <a id="start">PLAY</a>
+      <div class="vhs-noise"></div>
+    </div>
+
+    <div class="vhs-noise"></div>
 
     <section id="inicio">
       <!-- ESCENA ANIMADA -->
@@ -60,8 +64,24 @@
     </section>
 
     <script type="text/javascript" src="js/Scene.js"></script>
-    <script type="text/javascript" src="js/ImgLoader.js"></script>
+    <script type="text/javascript" src="js/Loaders.js"></script>
     <script type="text/javascript">
+      HTMLElement.prototype.animateTo = function (property, durationMs, timingFunction = "ease", fillMode = "forwards") {
+        let from = {};
+        let to = {};
+        for(let prop in property){
+          from[prop] = window.getComputedStyle(this, null).getPropertyValue(prop) || this.style.prop || undefined;
+          to[prop] = property[prop];
+        };
+        this.animate([from, to], {
+          duration: durationMs,
+          easing: timingFunction,
+          fill: fillMode
+        });
+
+        return this;
+      }
+
       // Convertir el splash en una escena
       var scene = new Scene("splash");
 
@@ -101,16 +121,36 @@
         }
       }, 1000);
 
+      // Loader
       const loader = new ImgLoader();
-      loader.onLoad = ()=>{
-        // Código al cargar
+      const loaderElement = document.getElementById("big-loader");
+
+      loader.onLoad = function(){
+        const vhsLoad = document.querySelectorAll(".vhs-noise")[0];
+        vhsLoad.style.display = "block";
+        setTimeout(function(){
+          vhsLoad.style.display = "none";
+        }, 1000);
+
+        const playBtn = document.getElementById("start");
+        playBtn.style.display = "inline-block";
+        playBtn.addEventListener("click", ()=>{
+          loaderElement.style.pointerEvents = "none";
+          loaderElement.animateTo({"opacity": "0"}, 1000);
+          setTimeout(function(){
+            loaderElement.style.display = "none";
+          }, 1000)
+        })
       };
       loader.init();
 
+      var vhsAnimation;
+      const vhsNoise = document.querySelectorAll(".vhs-noise")[1];
       window.addEventListener("scroll", () => {
-        document.getElementById("vhs-noise").style.display = "block";
-        setTimeout(function(){
-          document.getElementById("vhs-noise").style.display = "none";
+        clearTimeout(vhsAnimation);
+        vhsNoise.style.display = "block";
+        vhsAnimation = setTimeout(function(){
+          vhsNoise.style.display = "none";
         }, 500);
       })
     </script>
