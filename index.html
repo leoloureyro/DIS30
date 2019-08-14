@@ -7,24 +7,40 @@
     <link rel="stylesheet" href="https://use.typekit.net/hkc8zia.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://kit.fontawesome.com/a171b4c332.js"></script>
   </head>
 
   <body>
     <div id="big-loader" style="opacity: 1;">
-      <a id="start">PLAY</a>
-      <div class="vhs-noise"></div>
+      <img src="src/logo.svg">
+      <p id="loading"></p>
     </div>
 
     <div class="vhs-noise"></div>
     <header>
-      <div id="countdown">
-        <p>
+      <nav>
+        <div>
           Faltan <span id="dias">--</span>días
           <span id="hs">--</span>hs
           <span id="mins">--</span>m
           <span id="segs">--</span>s
-        </p>
-        <p>FADU, UBA</p>
+        </div>
+        <div id="menu">
+          <a id="sandwitch">
+            MENU
+            <span style="font-size:0.8em;">
+              <i class="fas fa-bars"></i>
+            </span>
+          </a>
+          <div id="menu-items">
+            <img src="src/logo.svg">
+            <ul>
+              <li><a href="#historia">Historia</a></li>
+              <li><a href="#cronograma">Cronograma</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -44,7 +60,7 @@
           </a>
         </div>
         <div class="scene-element" id="vhs" depth="5" rotation="-25">
-          <a href="#actividades">
+          <a href="#cronograma">
             <img src="src/vhs.png">
             <img src="src/vhs-overlay.png" class="neon-glow">
           </a>
@@ -58,14 +74,35 @@
       </div>
       <!-- CUENTA REGRESIVA -->
     </section>
-
+    <hr class="iridiscent">
     <section id="historia">
       <h2>AÑO 1989</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis cursus odio, vitae condimentum nunc. Sed facilisis sollicitudin eros et luctus. Phasellus sed nulla ac urna feugiat aliquet eget ut velit. Praesent sit amet ex nec justo semper hendrerit ac bibendum nisl. Donec at neque mattis, tincidunt ex et, porttitor tortor. Fusce justo eros, molestie et arcu quis, dapibus vehicula nibh. Integer blandit risus vitae nisi facilisis, quis congue nisi hendrerit.</p>
+      <slideshow id="a1989" controls thumbnails>
+        <slide>
+          <img src="src/afiches/fadu.jpg" style="transform:rotate(-1deg);">
+          <p>
+            <span class="slide-title">DISEÑO DE IMÁGEN Y SONIDO</span><br>
+            <br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis cursus odio, vitae condimentum nunc. Sed facilisis sollicitudin eros et luctus. Phasellus sed nulla ac urna feugiat aliquet eget ut velit. Praesent sit amet ex nec justo semper hendrerit ac bibendum nisl. Donec at neque mattis, tincidunt ex et, porttitor tortor.
+          </p>
+        </slide>
+        <slide>
+          <img src="src/afiches/bttf2.jpg">
+          <p>
+            <span class="slide-title" style="transform:rotate(2deg);">BACK TO THE FUTURE II</span><br>
+            <br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis cursus odio, vitae condimentum nunc. Sed facilisis sollicitudin eros et luctus. Phasellus sed nulla ac urna feugiat aliquet eget ut velit. Praesent sit amet ex nec justo semper hendrerit ac bibendum nisl. Donec at neque mattis, tincidunt ex et, porttitor tortor.
+          </p>
+        </slide>
+      </slideshow>
+    </section>
+    <section id="cronograma">
+
     </section>
 
-    <script type="text/javascript" src="js/Scene.js"></script>
     <script type="text/javascript" src="js/Loaders.js"></script>
+    <script type="text/javascript" src="js/Scene.js"></script>
+    <script type="text/javascript" src="js/Slideshow.js"></script>
     <script type="text/javascript">
       HTMLElement.prototype.animateTo = function (property, durationMs, timingFunction = "ease", fillMode = "forwards") {
         let from = {};
@@ -83,10 +120,21 @@
         return this;
       }
 
-      // Convertir el splash en una escena
+      // MENU
+      const sandwitch = document.querySelector("#sandwitch");
+      const menu = document.querySelector("#menu");
+
+      sandwitch.addEventListener("click", ()=>{
+        menu.classList.add("active");
+      })
+      menu.addEventListener("mouseleave", ()=>{
+        menu.classList.remove("active");
+      });
+
+      // CONVERTIR EL SPLASH EN UNA ESCENA
       var scene = new Scene("splash");
 
-      // Animar titulos dinámicos para el splash
+      // ANIMAR TITULOS DINÁMICOS PARA EL SPLASH
       const splashElements = document.getElementsByClassName("scene-element");
       for(let elem of splashElements){
         elem.addEventListener("mouseover", function(){
@@ -99,7 +147,7 @@
         });
       }
 
-      // Mostrar cuenta regresiva
+      // CUENTA REGRESIVA
       var countDown = new Date("Oct 10, 2019 00:00:00").getTime();
       var x = setInterval(function() {
         let ahora = new Date().getTime();
@@ -122,31 +170,30 @@
         }
       }, 1000);
 
-      // Loader
+      // LOADER
       const loader = new ImgLoader();
       const loaderElement = document.getElementById("big-loader");
 
+      loader.onChange = function(){
+        console.log(`cargando ${loader.percentage}%`);
+        loaderElement.querySelector("#loading").textContent = `cargando ${loader.percentage}%`;
+      }
       loader.onLoad = function(){
-        const vhsLoad = document.querySelectorAll(".vhs-noise")[0];
-        vhsLoad.style.display = "block";
+        loaderElement.querySelector("#loading").textContent = "presenta";
+        loaderElement.classList.add("loaded");
         setTimeout(function(){
-          vhsLoad.style.display = "none";
-        }, 1000);
-
-        const playBtn = document.getElementById("start");
-        playBtn.style.display = "inline-block";
-        playBtn.addEventListener("click", ()=>{
           loaderElement.style.pointerEvents = "none";
           loaderElement.animateTo({"opacity": "0"}, 1000);
           setTimeout(function(){
             loaderElement.style.display = "none";
           }, 1000)
-        })
+        }, 1000);
       };
       loader.init();
 
+      // SHADERS
       var vhsAnimation;
-      const vhsNoise = document.querySelectorAll(".vhs-noise")[1];
+      const vhsNoise = document.querySelector(".vhs-noise");
       window.addEventListener("scroll", () => {
         clearTimeout(vhsAnimation);
         vhsNoise.style.display = "block";
@@ -154,6 +201,38 @@
           vhsNoise.style.display = "none";
         }, 500);
       })
+
+      // SMOOTH SCROLL
+    	var links = document.getElementsByTagName('a');
+      var scrollAction;
+      var bodyScroll;
+      for(let link of links){
+        let target = link.getAttribute("href") || "";
+        if(target.startsWith("#")){
+          link.addEventListener("click", function(e){
+            e.preventDefault();
+            scrollAction = setInterval(function(){
+              let scrollTarget = Math.trunc(document.querySelector(target).getBoundingClientRect().top);
+              scrollToTarget(scrollTarget);
+            }, 10);
+          })
+        }
+      }
+      function scrollToTarget(t){
+        let scrollPos = window.scrollY || window.pageYOffset;
+        if(bodyScroll != scrollPos){
+          bodyScroll = scrollPos;
+          if(Math.abs(t) > 10){
+            window.scroll(0, Math.round(scrollPos + (t / 10)));
+          } else if(Math.abs(t) > 0){
+            window.scroll(0, Math.round(scrollPos + (t / Math.abs(t))));
+          } else {
+            clearInterval(scrollAction);
+          }
+        } else {
+          clearInterval(scrollAction);
+        }
+      }
     </script>
   </body>
 </html>
