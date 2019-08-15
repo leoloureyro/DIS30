@@ -87,6 +87,7 @@ section{
   padding-top: 50px;
   padding-bottom: 50px;
   width: 100%;
+  background-color: var(--negro-retro);
 }
 h2{
   margin-top: 10px;
@@ -155,19 +156,41 @@ header #menu-items ul{
   font-size: 0.8em;
   line-height: 1em;
 }
-hr.iridiscent{
+hr{
   height: 3px;
   margin: 0px;
   border: 0px;
+}
+hr.iridiscent{
   background: linear-gradient(45deg, var(--cyan-retro), var(--magenta-retro));
 }
 hr.gradient{
   display: inline-block;
-  height: 3px;
   width: 80%;
-  margin: 0px;
-  border: 0px;
   background: linear-gradient(90deg, var(--negro-retro) 0%, var(--cyan-retro) 50%, var(--negro-retro) 100%);
+}
+footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+  background: linear-gradient(0deg, var(--negro-retro) 0%, var(--violeta-oscuro-retro) 300%);
+}
+footer a, footer img{
+  height: 100%;
+}
+footer a{
+  display: flex;
+  align-items: center;
+  opacity: 0.5;
+  text-align: left;
+  transition: opacity 0.5s ease;
+}
+footer a:hover{
+  opacity: 1;
 }
 
 .section-holder{
@@ -302,21 +325,29 @@ hr.gradient{
 }
 .subscribirse{
   position: absolute;
-  right: 50px;
+  right: 40px;
   bottom: -10px;
+}
+.enviar{
+  width: 120px;
+  margin-bottom: 15px;
+  transform: skewX(-5deg);
+}
+.subscribirse, .enviar{
   background-color: var(--violeta-claro-retro);
   color: white;
   font-family: inherit;
-  font-size: 1.3em;
-  padding: 5px 10px;
+  font-size: 1.4em;
+  padding: 5px 15px;
   border: 0px;
   cursor: pointer;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease, filter 0.2s ease;
 }
-.actividad:hover .subscribirse{
+.actividad:hover .subscribirse, .enviar:hover{
   background-color: var(--magenta-retro);
+  filter: drop-shadow(3px 3px 0px var(--cyan-retro));
 }
-.subscribirse::after{
+.subscribirse::after, .enviar::after{
   content: "";
   position: absolute;
   height: 100%;
@@ -326,11 +357,11 @@ hr.gradient{
   background-color: inherit;
   transition: width 0.25s ease, right 0.25s ease 0.2s;
 }
-.subscribirse:hover::after{
+.subscribirse:hover::after, .enviar:hover::after{
   width: 10px;
   right: -15px;
 }
-.subscribirse::before{
+.subscribirse::before, .enviar::before{
   content: "";
   position: absolute;
   height: 100%;
@@ -340,7 +371,7 @@ hr.gradient{
   background-color: inherit;
   transition: width 0.25s ease, right 0.25s ease 0.2s;
 }
-.subscribirse:hover::before{
+.subscribirse:hover::before, .enviar:hover::before{
   width: 5px;
   right: -25px;
 }
@@ -356,6 +387,10 @@ hr.gradient{
 }
 .detalles{
   margin-top: 0px;
+  font-family: t26-carbon, monospace;
+}
+.catedra p{
+  margin-left: 15px;
   font-family: t26-carbon, monospace;
 }
 
@@ -434,8 +469,6 @@ hr.gradient{
   padding-right: 10%;
   padding-left: 10%;
   box-sizing: border-box;
-  /* background: linear-gradient(to bottom, var(--negro-retro) 0%, var(--violeta-oscuro-retro) 100%); */
-  background-color: var(--negro-retro);
 }
 #a1989{
   position: relative;
@@ -472,6 +505,30 @@ hr.gradient{
 prev, next, thumb{
   opacity: 0.3;
   cursor: pointer;
+}
+#contacto form{
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  max-width: 80%;
+}
+#contacto input, #contacto textarea{
+  width: 100%;
+  padding: 4px 0px;
+  margin-bottom: 16px;
+  background: none;
+  border: none;
+  border-bottom: solid 2px var(--azul-fadu);
+  color: white;
+  font-family: t26-carbon, monospace;
+  font-size: 1.3em;
+  resize: none;
+  outline: 0px;
+  transition: border 0.5s ease;
+}
+#contacto input:focus, #contacto textarea:focus{
+  border-bottom: solid 2px var(--cyan-retro);
 }
 
 /* SHADERS */
