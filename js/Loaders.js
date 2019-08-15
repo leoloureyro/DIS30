@@ -38,7 +38,7 @@ class Loader {
 class ImgLoader extends Loader {
   constructor(autosearch = true, autoinit = 0){
     super();
-    this.imgObj = new Image();
+    // this.imgObj = new Image();
     if(autosearch === true){
       // Cargar tags IMG
       for(let img of document.getElementsByTagName("img")){
@@ -79,10 +79,14 @@ class ImgLoader extends Loader {
 
   init(){
     if(this.resources.length > 0 && this.loaded < this.resources.length){
-      this.imgObj.src = this.resources[this.loaded];
-      this.loaded++;
+      let src = this.resources[this.loaded];
+      let imgObj = new Image();
       this.evalPercentage();
-      this.imgObj.onLoad = this.init();
+      imgObj.onload = ()=>{
+        this.loaded++;
+        this.init();
+      }
+      imgObj.src = src;
     } else {
       this.exit();
     }

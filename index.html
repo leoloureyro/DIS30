@@ -36,7 +36,7 @@
             <img src="src/logo.svg">
             <ul>
               <li><a href="#historia">Historia</a></li>
-              <li><a href="#cronograma">Cronograma</a></li>
+              <li><a href="#cronograma">Actividades</a></li>
               <li><a href="#contacto">Contacto</a></li>
             </ul>
           </div>
@@ -87,17 +87,109 @@
           </p>
         </slide>
         <slide>
-          <img src="src/afiches/bttf2.jpg">
+          <img src="src/afiches/bttf2.jpg" style="transform:rotate(2deg);">
           <p>
-            <span class="slide-title" style="transform:rotate(2deg);">BACK TO THE FUTURE II</span><br>
+            <span class="slide-title">BACK TO THE FUTURE II</span><br>
+            <br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis cursus odio, vitae condimentum nunc. Sed facilisis sollicitudin eros et luctus. Phasellus sed nulla ac urna feugiat aliquet eget ut velit. Praesent sit amet ex nec justo semper hendrerit ac bibendum nisl. Donec at neque mattis, tincidunt ex et, porttitor tortor.
+          </p>
+        </slide>
+        <slide>
+          <img src="src/afiches/pop.jpg" style="transform:rotate(-3deg);">
+          <p>
+            <span class="slide-title">PRINCE OF PERSIA: PC</span><br>
             <br>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis cursus odio, vitae condimentum nunc. Sed facilisis sollicitudin eros et luctus. Phasellus sed nulla ac urna feugiat aliquet eget ut velit. Praesent sit amet ex nec justo semper hendrerit ac bibendum nisl. Donec at neque mattis, tincidunt ex et, porttitor tortor.
           </p>
         </slide>
       </slideshow>
     </section>
-    <section id="cronograma">
 
+    <hr class="gradient">
+
+    <section id="cronograma">
+      <h2>ACTIVIDADES</h2>
+      <div class="actividad">
+        <div class="pic" style="background-image:url(src/actividades/proyec.jpg)"></div>
+        <div class="info">
+          <p class="title">
+            PROYECCIÓN VOLUMÉTRICA
+          </p>
+          <p class="descripcion">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </p>
+          <p class="detalles">
+            07/09 | 14:30hs
+          </p>
+        </div>
+        <button class="subscribirse">SUBSCRIBITE</button>
+      </div>
+      <div class="actividad">
+        <div class="pic" style="background-image:url(src/actividades/filmo.jpg)"></div>
+        <div class="info">
+          <p class="title">
+            FILMOGRAFÍA DIS
+          </p>
+          <p class="descripcion">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </p>
+          <p class="detalles">
+            07/09 | 14:30hs
+          </p>
+        </div>
+        <button class="subscribirse">SUBSCRIBITE</button>
+      </div>
+      <div class="actividad">
+        <div class="pic" style="background-image:url(src/actividades/vr.jpg)"></div>
+        <div class="info">
+          <p class="title">
+            NUEVA REALIDAD
+          </p>
+          <p class="descripcion">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </p>
+          <p class="detalles">
+            07/09 | 14:30hs
+          </p>
+        </div>
+        <button class="subscribirse">SUBSCRIBITE</button>
+      </div>
+      <div class="actividad">
+        <div class="pic" style="background-image:url(src/actividades/camara.jpg)"></div>
+        <div class="info">
+          <p class="title">
+            TALLER DE CÁMARA
+          </p>
+          <p class="descripcion">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </p>
+          <p class="detalles">
+            07/09 | 14:30hs
+          </p>
+        </div>
+        <button class="subscribirse">SUBSCRIBITE</button>
+      </div>
+      <div class="actividad">
+        <div class="pic" style="background-image:url(src/actividades/foley.jpg)"></div>
+        <div class="info">
+          <p class="title">
+            EL ARTE DEL FOLEY
+          </p>
+          <p class="descripcion">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </p>
+          <p class="detalles">
+            07/09 | 14:30hs
+          </p>
+        </div>
+        <button class="subscribirse">SUBSCRIBITE</button>
+      </div>
+    </section>
+
+    <hr class="gradient">
+
+    <section id="contacto">
+      <h2>CONTACTO</h2>
     </section>
 
     <script type="text/javascript" src="js/Loaders.js"></script>
@@ -123,11 +215,15 @@
       // MENU
       const sandwitch = document.querySelector("#sandwitch");
       const menu = document.querySelector("#menu");
+      const menuItems = document.querySelector("#menu-items");
 
       sandwitch.addEventListener("click", ()=>{
         menu.classList.add("active");
       })
       menu.addEventListener("mouseleave", ()=>{
+        menu.classList.remove("active");
+      });
+      menuItems.addEventListener("click", ()=>{
         menu.classList.remove("active");
       });
 
@@ -175,7 +271,7 @@
       const loaderElement = document.getElementById("big-loader");
 
       loader.onChange = function(){
-        console.log(`cargando ${loader.percentage}%`);
+        // console.log(`cargando ${loader.percentage}%`);
         loaderElement.querySelector("#loading").textContent = `cargando ${loader.percentage}%`;
       }
       loader.onLoad = function(){
