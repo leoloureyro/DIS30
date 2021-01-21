@@ -1,5 +1,20 @@
-@media screen and (min-width: 1439px) {
-  .scene-element img{
-    /* transform: scale(1.15); */
+@media screen and (max-width: 850px) {
+  #a1989{
+    height: 550px;
+  }
+  #a1989 slide{
+    grid-template-columns: 1fr;
+    grid-template-rows: 300px auto;
+  }
+  #a1989 slide p{
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-device-width: 650px) and (orientation: portrait) {
+  #landscape-warning{
+    opacity: 1;
   }
 }
